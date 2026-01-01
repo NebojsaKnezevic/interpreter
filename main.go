@@ -4,9 +4,11 @@ import (
 
 	// "go/token"
 	"fmt"
-	"interpreter/repl"
-	"os"
-	"os/user"
+	"interpreter/lexer"
+	"interpreter/parser"
+	// "interpreter/repl"
+	// "os"
+	// "os/user"
 )
 
 func main() {
@@ -23,24 +25,26 @@ func main() {
 	// fmt.Println("Content: ")
 	// fmt.Println(string(data))
 
-	user, err := user.Current()
-	if err != nil {
-		panic(err)
-	}
-	fmt.Printf("Hello %s! This is the Monkey programming language!\n",
-		user.Username)
-	fmt.Printf("Feel free to type in commands\n")
-	repl.Start(os.Stdin, os.Stdout)
+	// user, err := user.Current()
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// fmt.Printf("Hello %s! This is the Monkey programming language!\n",
+	// 	user.Username)
+	// fmt.Printf("Feel free to type in commands\n")
+	// repl.Start(os.Stdin, os.Stdout)
 
-	// input := `
-	// 10 != 9;
-	// `
+	input := `
+	let x = 5;
+	let y = 10;
+	let foobar = 838383;
+	`
 
-	// lex := lexer.New(input)
+	lex := lexer.New(input)
 
 	// for i := 0; i != len(input); i++ {
 
-	// 	tok := lex.NextToken() // Pozovi funkciju SAMO JEDNOM
+	// 	tok := lex.NextToken()
 
 	// 	if tok.Type == token.EOF {
 	// 		break
@@ -48,5 +52,12 @@ func main() {
 
 	// 	fmt.Println(tok)
 	// }
+
+	par := parser.New(lex)
+	program := par.ParseProgram()
+	// fmt.Println(program.Statements)
+	for i := 0; i != len(program.Statements); i++ {
+		fmt.Println(program.Statements[i].TokenLiteral())
+	}
 
 }
