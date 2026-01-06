@@ -6,7 +6,7 @@ import (
 
 type Lexer struct {
 	input        string
-	position     int
+	position     int //cur position in stream
 	readPosition int //next position in stream
 	ch           byte
 }
