@@ -1,8 +1,9 @@
-package parser
+package parserTest
 
 import (
 	"interpreter/ast"
 	"interpreter/lexer"
+	"interpreter/parser"
 	"testing"
 )
 
@@ -19,7 +20,7 @@ func TestLetStatements(t *testing.T) {
 	// `
 
 	l := lexer.New(input)
-	p := New(l)
+	p := parser.New(l)
 
 	program := p.ParseProgram()
 	checkParserErrors(t, p)
@@ -67,7 +68,7 @@ func testLetStatement(t *testing.T, s ast.Statement, name string) bool {
 	return true
 }
 
-func checkParserErrors(t *testing.T, p *Parser) {
+func checkParserErrors(t *testing.T, p *parser.Parser) {
 	errors := p.Errors()
 
 	if len(errors) == 0 {

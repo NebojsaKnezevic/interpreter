@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"interpreter/lexer"
 	"interpreter/parser"
+	// "interpreter/token"
 	// "interpreter/repl"
 	// "os"
 	// "os/user"
@@ -34,11 +35,7 @@ func main() {
 	// fmt.Printf("Feel free to type in commands\n")
 	// repl.Start(os.Stdin, os.Stdout)
 
-	input := `
-	let x = 5;
-	let y = 10;
-	let foobar = 838383;
-	`
+	input := `1 + 2 + 3;`
 
 	lex := lexer.New(input)
 
@@ -57,7 +54,7 @@ func main() {
 	program := par.ParseProgram()
 	// fmt.Println(program.Statements)
 	for i := 0; i != len(program.Statements); i++ {
-		fmt.Println(program.Statements[i].TokenLiteral())
+		fmt.Println(program.TokenLiteral(i))
 	}
 
 }
