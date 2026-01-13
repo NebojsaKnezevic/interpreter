@@ -3,6 +3,7 @@ package main
 import (
 
 	// "go/token"
+
 	"fmt"
 	"interpreter/lexer"
 	"interpreter/parser"
@@ -35,7 +36,11 @@ func main() {
 	// fmt.Printf("Feel free to type in commands\n")
 	// repl.Start(os.Stdin, os.Stdout)
 
-	input := `1 + 2 + 3;`
+	// api.Server()
+
+	input := `
+	1 + 2 + 3;
+	`
 
 	lex := lexer.New(input)
 
@@ -52,9 +57,9 @@ func main() {
 
 	par := parser.New(lex)
 	program := par.ParseProgram()
-	// fmt.Println(program.Statements)
-	for i := 0; i != len(program.Statements); i++ {
-		fmt.Println(program.TokenLiteral(i))
-	}
+	fmt.Println(program.String())
+	// for i := 0; i != len(program.Statements); i++ {
+	// 	fmt.Println(program.TokenLiteral(i))
+	// }
 
 }
